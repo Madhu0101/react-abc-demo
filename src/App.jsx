@@ -331,103 +331,20 @@
 //movie with add tag
 
 import "./App.css";
-import { useEffect, useState } from "react";
-import { Moviecard } from "./Moviecard";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-
-import { Routes, Route, Link, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import { Routes, Route, Link } from "react-router-dom";
 import { ColorGame } from "./ColorGame";
+import { Movies } from "./Movies";
+import { Moviedetails } from "./Moviedetails";
 
-export function Movies({}) {
-  const [name, setname] = useState("name");
-  const [poster, setposter] = useState("poster");
-  const [summary, setsummary] = useState("summary");
-  const [rating, setrating] = useState("rating");
+export default function App() {
   const [mvlist, setmvlist] = useState([]);
   useEffect(() => {
     fetch("https://64c3962067cfdca3b65fef80.mockapi.io/movies")
       .then((res) => res.json())
-      .then((data) => setmvlist(data));
+      .then((data) => console.log(data));
   }, []);
-
-  return (
-    <div className="App">
-      <TextField
-        label="name"
-        variant="outlined"
-        onChange={(event) => {
-          setname(event.target.value);
-        }}
-      />
-      {name}
-
-      <TextField
-        label="poster"
-        variant="outlined"
-        onChange={(event) => {
-          setposter(event.target.value);
-        }}
-      />
-      {poster}
-      <TextField
-        label="summary"
-        variant="outlined"
-        onChange={(event) => {
-          setsummary(event.target.value);
-        }}
-      />
-      {summary}
-
-      <TextField
-        label="rating"
-        variant="outlined"
-        onChange={(event) => {
-          setrating(event.target.value);
-        }}
-      />
-      {rating}
-
-      <Button
-        variant="contained"
-        // onClick={(event) =>
-        //   setmvlist([
-        //     ...mvlist,
-        //     {
-        //       name: name,
-        //       poster: poster,
-        //       rating: rating,
-        //       summary: summary,
-        //     },
-        //   ])
-        // }
-      >
-        Add movie
-      </Button>
-      <div className="Movies"></div>
-      {mvlist.map((x, index) => (
-        <Moviecard
-          // clr
-          name={x.name}
-          poster={x.poster}
-          summary={x.summary}
-          rating={x.rating}
-          key={index}
-          id={x.id}
-          // deleteButton={}
-        />
-      ))}
-    </div>
-  );
-}
-
-export default function App() {
-  const [mvlist, setmvlist] = useState([]);
-  // useEffect(() => {
-  //   fetch("https://64c3962067cfdca3b65fef80.mockapi.io/movies")
-  //     .then((res) => res.json())
-  //     .then((data) => console.log(data));
-  // }, []);
 
   return (
     <div className="appdetial">
@@ -511,32 +428,6 @@ function NotFound() {
     <div>
       <h1>404 - Not Found</h1>
       <p>Oops! The page you're looking for does not exist.</p>
-    </div>
-  );
-}
-
-function Moviedetails({ mvlist }) {
-  const { id } = useParams();
-  // console.log(mvlist);
-  const movie = mvlist[id];
-
-  return (
-    <div className="moviecard">
-      <iframe
-        width="702"
-        height="395"
-        src={movie.trailer}
-        title="RRR Trailer (Telugu) - NTR, Ram Charan, Ajay Devgn, Alia Bhatt | SS Rajamouli | 25th March 2022"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-      ></iframe>
-      <div className="head">
-        <h2>{movie.name}</h2>
-        <h2>❤️{movie.rating}</h2>
-      </div>
-
-      <p>{movie.summary}</p>
     </div>
   );
 }
