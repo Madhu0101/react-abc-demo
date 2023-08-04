@@ -5,6 +5,7 @@ import InfoIcon from "@mui/icons-material/Info";
 
 export function Moviecard({ name, poster, summary, rating, id }) {
   const [show, setShow] = useState(true);
+
   const navigate = useNavigate();
 
   return (
