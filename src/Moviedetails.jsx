@@ -1,9 +1,17 @@
 import { useParams } from "react-router-dom";
-
-export function Moviedetails({ mvlist }) {
+import { useState } from "react";
+import { useEffect } from "react";
+export function Moviedetails() {
   const { id } = useParams();
+  const [movie, setmvlist] = useState([]);
+  useEffect(() => {
+    fetch("https://64c3962067cfdca3b65fef80.mockapi.io/movies/" + id)
+      .then((res) => res.json())
+      .then((data) => setmvlist(data));
+  }, []);
+
   // console.log(mvlist);
-  const movie = mvlist[id];
+  // const movie = mvlist[id];
 
   return (
     <div className="moviecard">
@@ -12,7 +20,7 @@ export function Moviedetails({ mvlist }) {
         height="395"
         src={movie.trailer}
         title="RRR Trailer (Telugu) - NTR, Ram Charan, Ajay Devgn, Alia Bhatt | SS Rajamouli | 25th March 2022"
-        frameborder="0"
+        frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen
       ></iframe>

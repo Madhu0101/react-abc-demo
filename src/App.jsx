@@ -337,13 +337,14 @@ import { Routes, Route, Link } from "react-router-dom";
 import { ColorGame } from "./ColorGame";
 import { Movies } from "./Movies";
 import { Moviedetails } from "./Moviedetails";
+import { Addmovie } from "./Addmovie";
 
 export default function App() {
   const [mvlist, setmvlist] = useState([]);
   useEffect(() => {
     fetch("https://64c3962067cfdca3b65fef80.mockapi.io/movies")
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => setmvlist(data));
   }, []);
 
   return (
@@ -359,7 +360,7 @@ export default function App() {
         <Link to="/">Home</Link>
       </nav>
       <nav>
-        <Link to="/addmovie">ColorGame</Link>
+        <Link to="/movies/add">Addmovie</Link>
       </nav>
 
       <Routes>
@@ -372,6 +373,7 @@ export default function App() {
           path="/moviedetials/:id"
           element={<Moviedetails mvlist={mvlist} />}
         />
+        <Route path="/movies/add" element={<Addmovie />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
@@ -427,7 +429,7 @@ function NotFound() {
   return (
     <div>
       <h1>404 - Not Found</h1>
-      <p>Oops! The page you're looking for does not exist.</p>
+      <p>Oops! The page you are looking for does not exist.</p>
     </div>
   );
 }
