@@ -25,6 +25,23 @@ export function Movies() {
       .then((res) => res.json())
       .then(() => getMovie());
   };
+
+  const editMovie = (id) => {
+    fetch("https://64cc7dce2eafdcdc8519e155.mockapi.io/movies/" + id, {
+      method: "PUT",
+      body: JSON.stringify({
+        newName,
+        newPoster,
+        newSummary,
+        newTrailer,
+        newRating,
+      }),
+    })
+      .then((res) => res.json())
+      // .then((data) => setmovie(data))
+      .then(() => navigate("/movies/" + id))
+      .then(() => getMovie());
+  };
   return (
     <div>
       {mvlist.map((x, index) => (
@@ -36,8 +53,11 @@ export function Movies() {
           rating={x.rating}
           key={index}
           id={x.id}
-          deletemovie={
+          deleteButton={
             <button onClick={() => deleteMovie(x.id)}>Delete</button>
+          }
+          editButton={
+            <button onClick={() => editMovie(movie.id)}> Edit Movie </button>
           }
         />
       ))}

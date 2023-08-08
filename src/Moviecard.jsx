@@ -3,7 +3,15 @@ import { useNavigate } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
 
-export function Moviecard({ name, poster, summary, rating, id, deletemovie }) {
+export function Moviecard({
+  name,
+  poster,
+  summary,
+  rating,
+  id,
+  deleteButton,
+  editButton,
+}) {
   const [show, setShow] = useState(true);
 
   const navigate = useNavigate();
@@ -48,7 +56,8 @@ export function Moviecard({ name, poster, summary, rating, id, deletemovie }) {
       ) : (
         <p></p>
       )}
-      {deletemovie}
+      {deleteButton}
+      {editButton}
     </div>
   );
 }
